@@ -16,12 +16,16 @@ $FILE_MONITOR = $DIR_INTERNAL . 'data2-monitor.php';
 
 if(!is_file($FILE_MONITOR))
 {
-	https://raw.githubusercontent.com/d2scripts/internal-monitor-auto-restart/refs/heads/main/monitor/monitor-data2.php
+	 $Content = 'https://raw.githubusercontent.com/d2scripts/internal-monitor-auto-restart/refs/heads/main/monitor/monitor-data2.php';
+	 if( strpos($Content, '#DATA2-INTERNAL-CHECK-START') !== false && strpos($Content, '#DATA2-INTERNAL-CHECK-END') !== false)
+	 {
+		file_put_contents($FILE_MONITOR, $Content);
+	 }	
 }
 
 if(!is_file($CONF_FILE)) {
     $Content = get_Data("https://raw.githubusercontent.com/d2scripts/internal-monitor-auto-restart/refs/heads/main/model-nginx__zzz-data2-internal-monitor.conf");
-    if( strpos($Content, '#DATA2-INTERNAL-CHECK-START') !== false && strpos($Content, '#DATA2-INTERNAL-CHECK-START') !== false)
+    if( strpos($Content, '#DATA2-INTERNAL-CHECK-START') !== false && strpos($Content, '#DATA2-INTERNAL-CHECK-END') !== false)
     {
        file_put_contents($CONF_FILE, $Content);
        $FLG_RESTART_NGINX = true;
