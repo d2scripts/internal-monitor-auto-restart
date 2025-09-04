@@ -7,10 +7,16 @@ $REASON = '';
 $CONF_FILE = '/etc/nginx/conf.d/zzz-data2-internal-monitor.conf';
 
 $DIR_INTERNAL = '/etc/data2-internal-monitor/';
-
 if(!is_dir($DIR_INTERNAL))
 {
-	system('cd /etc/; git clone 
+	mkdir($DIR_INTERNAL);
+}
+
+$FILE_MONITOR = $DIR_INTERNAL . 'data2-monitor.php';
+
+if(!is_file($FILE_MONITOR))
+{
+	https://raw.githubusercontent.com/d2scripts/internal-monitor-auto-restart/refs/heads/main/monitor/monitor-data2.php
 }
 
 if(!is_file($CONF_FILE)) {
