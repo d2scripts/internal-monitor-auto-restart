@@ -11,6 +11,11 @@ if(!is_dir($DIR_INTERNAL))
 {
 	mkdir($DIR_INTERNAL);
 }
+else
+{
+	echo $DIR_INTERNAL . " [EXISTS]" . PHP_EOL;
+}
+
 
 $FILE_MONITOR = $DIR_INTERNAL . 'data2-monitor.php';
 
@@ -22,6 +27,10 @@ if(!is_file($FILE_MONITOR))
 		file_put_contents($FILE_MONITOR, $Content);
 	 }	
 }
+else
+{
+	echo $FILE_MONITOR . " [EXISTS]" . PHP_EOL;
+}
 
 if(!is_file($CONF_FILE)) {
     $Content = get_Data("https://raw.githubusercontent.com/d2scripts/internal-monitor-auto-restart/refs/heads/main/model-nginx__zzz-data2-internal-monitor.conf");
@@ -32,6 +41,11 @@ if(!is_file($CONF_FILE)) {
 	   $REASON = 'CREATING NGINX FILE';
     }
 }
+else
+{
+	echo $CONF_FILE . " [EXISTS]" . PHP_EOL;
+}
+
 
 if($FLG_RESTART_NGINX)
 {
@@ -39,6 +53,11 @@ if($FLG_RESTART_NGINX)
    $TXT = 'RESTARTING NGINX ' . $REASON;
    system('data2-notify ' . escapeshellarg($TXT));
 }
+else
+{
+	echo "NGINX INTACT" . PHP_EOL;
+}
+
 
 function get_data($url, $POST = false, $FLG_FOLLOW_REDIRECT = false, $ADDHEADERS = [])
 {
