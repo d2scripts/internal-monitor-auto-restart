@@ -6,12 +6,20 @@ $REASON = '';
 
 $CONF_FILE = '/etc/nginx/conf.d/zzz-data2-internal-monitor.conf';
 
+$DIR_INTERNAL = '/etc/data2-internal-monitor/';
+
+if(!is_dir($DIR_INTERNAL))
+{
+	system('cd /etc/; git clone 
+}
+
 if(!is_file($CONF_FILE)) {
     $Content = get_Data("https://raw.githubusercontent.com/d2scripts/internal-monitor-auto-restart/refs/heads/main/model-nginx__zzz-data2-internal-monitor.conf");
     if( strpos($Content, '#DATA2-INTERNAL-CHECK-START') !== false && strpos($Content, '#DATA2-INTERNAL-CHECK-START') !== false)
     {
        file_put_contents($CONF_FILE, $Content);
-      $FLG_RESTART_NGINX = true;
+       $FLG_RESTART_NGINX = true;
+	   $REASON = 'CREATING NGINX FILE';
     }
 }
 
